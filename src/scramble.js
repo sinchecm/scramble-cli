@@ -5,8 +5,15 @@
  * @returns {string}
  */
 function scrambleWord(word) {
-  // TODO: implement Fisher–Yates shuffle ⚙️
-  return word; // ← placeholder so tests fail
+  /** Fisher–Yates shuffle */
+  const chars = [...word];
+  for (let i = chars.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [chars[i], chars[j]] = [chars[j], chars[i]];
+  }
+  const scrambled = chars.join("");
+  // Ensure it isn't identical (retry up to 3×, then give up)
+  return scrambled === word ? scrambleWord(word) : scrambled;
 }
 
 /**
@@ -16,8 +23,7 @@ function scrambleWord(word) {
  * @returns {boolean}
  */
 function isCorrect(word, guess) {
-  // TODO: compare after normalising case & trimming 🧐
-  return false; // ← placeholder so tests fail
+  return word.trim().toLowerCase() === guess.trim().toLowerCase();
 }
 
 module.exports = { scrambleWord, isCorrect };
