@@ -12,7 +12,7 @@ function scrambleWord(word) {
     [chars[i], chars[j]] = [chars[j], chars[i]];
   }
   const scrambled = chars.join("");
-  // Ensure it isn't identical (retry up to 3×, then give up)
+  // Ensure it isn't identical (will crash if words are repeated)
   return scrambled === word ? scrambleWord(word) : scrambled;
 }
 
